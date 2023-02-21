@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
-from .serializers import UserSerializers, CategorySerializers, ProductSerializers
-from .models import UsersModel, CategoryModel, ProductModel
+from .serializers import UserSerializers, CategorySerializers, ProductSerializers, BasketSerializers
+from .models import UsersModel, CategoryModel, ProductModel, BasketModel
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
@@ -37,3 +37,8 @@ class ProductsByCategory(APIView):
         data = ProductModel.objects.filter(category_id=pk)
         serializer = ProductSerializers(data, many=True)
         return Response(serializer.data)
+
+
+class BasketView(ModelViewSet):
+    queryset = BasketModel.objects.all()
+    serializer_class = BasketSerializers

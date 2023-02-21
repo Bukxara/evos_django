@@ -34,3 +34,13 @@ class ProductModel(models.Model):
 
     def get_absolute_url(self):
         return reverse("shop", args=[str(self.id)])
+
+
+class BasketModel(models.Model):
+    telegram_id = models.CharField(max_length=50)
+    product_id = models.CharField(max_length=9)
+    product_price = models.IntegerField(blank=True)
+    product_count = models.IntegerField(blank=True)
+
+    def __str__(self):
+        return self.telegram_id
